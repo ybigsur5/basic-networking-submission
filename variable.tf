@@ -1,27 +1,31 @@
-variable "region" {
-  description = "The AWS region to use"
-  default     = "ap-southeast-1"
+variable "aws_config" {
+  description = "AWS configuration settings"
+  type = object({
+    region  = string
+    profile = string
+  })
+  default = {
+    region  = "ap-southeast-1"
+    profile = "default"
+  }
 }
 
-variable "profile" {
-  description = "The AWS profile to use"
-  default     = "default"
+variable "vpc_settings" {
+  description = "VPC configuration"
+  type = object({
+    name = string
+    cidr = string
+  })
+  default = {
+    name = "dicoding-vpc"
+    cidr = "10.0.0.0/16"
+  }
 }
 
-variable "vpc_name" {
-  description = "The name of the VPC"
-  default     = "dicoding-vpc"
-}
-
-variable "vpc_cidr" {
-  description = "The CIDR of the VPC"
-  default     = "10.0.0.0/16"
-}
-
-variable "public_key" {
-  description = "The public key to use for SSH"
-}
-
-variable "private_key" {
-  description = "The private key to use for SSH"
+variable "ssh_keys" {
+  description = "SSH key paths"
+  type = object({
+    public  = string
+    private = string
+  })
 }
